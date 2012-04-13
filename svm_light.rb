@@ -52,10 +52,10 @@ index 8b5e19a..075e017 100755
  #pr_loqo/pr_loqo.o: pr_loqo/pr_loqo.c
 diff --git a/svm_classifyd.c b/svm_classifyd.c
 new file mode 100755
-index 0000000..bb217e4
+index 0000000..1be5b4d
 --- /dev/null
 +++ b/svm_classifyd.c
-@@ -0,0 +1,66 @@
+@@ -0,0 +1,67 @@
 +#include "svm_common.h"
 +
 +char modelfile[200];
@@ -73,7 +73,7 @@ index 0000000..bb217e4
 +  DOC *doc;
 +
 +  if (argc < 2) {
-+    printf("usage: svm_classify model_file\n");
++    fprintf(stderr, "usage: svm_classify model_file\n");
 +    exit(0);
 +  }
 +  strcpy (modelfile, argv[1]);
@@ -97,7 +97,7 @@ index 0000000..bb217e4
 +      // make sure features correspond to model
 +      for (i = 0; (words[i]).wnum != 0; i++) {
 +        if ((words[i]).wnum > model->totwords) {
-+          printf("unrecognized feature (feature number is too high)\n");
++          fprintf(stderr, "unrecognized feature (feature number is too high)\n");
 +          exit(1);
 +        }
 +      }
@@ -112,6 +112,7 @@ index 0000000..bb217e4
 +    }
 +
 +    printf("%.8g\n",dist);
++    fflush(stdout);
 +
 +    free_example(doc, 1);
 +  }
@@ -122,7 +123,3 @@ index 0000000..bb217e4
 +
 +
 +
--- 
-1.7.9.5
-
-
